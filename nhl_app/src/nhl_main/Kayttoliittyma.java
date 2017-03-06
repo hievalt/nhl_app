@@ -32,7 +32,7 @@ public class Kayttoliittyma {
 		}
 		// Toimintojen tunnistus ja toteuttaminen
 			switch (toiminto) {
-				case ("aikaväli"):
+				case ("aikavali"):
 					PelitAikavalilla.main(args);
 					break;
 				case ("pelaajat"):
