@@ -12,14 +12,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author v
- * @author j
+ * @author Valtteri Hietala
+ * @author Juuso Eskelinen
  * version 6.3.2017
  */
 public class PelitAikavalilla {
 
 	/**
-	 * Tietojen sy√∂tt√∂ ja tulosten tulostus
+	 * Tietojen kysyminen k‰ytt‰j‰lt‰ ja tulosten tulostus
 	 * 
 	 * @param args
 	 * @throws IOException
@@ -28,11 +28,11 @@ public class PelitAikavalilla {
 	public static void main(String[] args) throws IOException, ParseException {
 		// Tiedonsy√∂tt√∂
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("\nSy√∂t√§ joukkue (tyhj√§ = haetaan kaikki): ");
+		System.out.print("\nsyˆt‰ joukkue (tyhj‰ = haetaan kaikki): ");
 		String joukkue = br.readLine();
-		System.out.print("Sy√∂t√§ alkupvm: ");
+		System.out.print("Syˆt‰ alkupvm: ");
 		String alkupvm = br.readLine();
-		System.out.print("Sy√∂t√§ loppupvm: ");
+		System.out.print("Syˆt‰ loppupvm: ");
 		String loppupvm = br.readLine();
 		String format = "%-15s%s%n";
 		String yksiJoukkue = ""; // Jos haetaan tietty√§ joukkuetta
@@ -58,6 +58,7 @@ public class PelitAikavalilla {
 		}
 	}
 
+	//TODO: tiedostosta joukkueet?
 	/**
 	 * Hakee kaikkien joukkueiden pelim√§√§r√§t
 	 * 
@@ -101,7 +102,7 @@ public class PelitAikavalilla {
 	 */
 	private static String LueTiedosto(String joukkue, String alkupvm,
 			String loppupvm) throws IOException, ParseException {
-		// System.out.println("Sy√∂tetty joukkue oli: " + joukkue);
+		// System.out.println("Syˆtetty joukkue oli: " + joukkue);
 		String rivi = "";
 		boolean vali = false;
 		int lkm = 0;
@@ -109,7 +110,7 @@ public class PelitAikavalilla {
 		try {
 			BufferedReader lukija = new BufferedReader(
 					new FileReader(
-							"/home/vlttr/Dropbox/Eclipse workspace/TiedostonKasittely/nhl.txt"));
+							"resources/nhl.txt"));
 
 			while ((rivi = lukija.readLine()) != null) {
 				// jos vali = true, ni tiedostoa luetaan sellasesta kohasta joka
@@ -141,7 +142,7 @@ public class PelitAikavalilla {
 			e.printStackTrace();
 		}
 
-		return lkm + " peli√§ - " + joukkue; // + "aikav√§lill√§ " + alkupvm +
+		return lkm + " peli‰ - " + joukkue; // + "aikav√§lill√§ " + alkupvm +
 											// " - " + loppupvm ;
 	}
 
