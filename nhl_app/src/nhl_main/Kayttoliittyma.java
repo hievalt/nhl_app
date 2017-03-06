@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 
 /**
- * "Kayttoliittyma toimintojen testaamiselle
+ * "Käyttöliittymä" toimintojen testaamiselle
  * 
  * @author V, J
  *
@@ -30,8 +30,7 @@ public class Kayttoliittyma {
 				PelitAikavalilla.main(args);
 				break;
 		}
-
-			// Toimintojen tunnistus ja toteuttaminen
+		// Toimintojen tunnistus ja toteuttaminen
 			switch (toiminto) {
 				case ("aikaväli"):
 					PelitAikavalilla.main(args);
