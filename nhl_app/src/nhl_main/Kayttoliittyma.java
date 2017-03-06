@@ -29,6 +29,9 @@ public class Kayttoliittyma {
 				case ("aikaväli"):
 					PelitAikavalilla.main(args);
 					break;
+				case ("pelaajat"):
+					HaePelaajat.main(args);
+				break;
 				}
 		}
 	}
