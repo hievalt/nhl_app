@@ -60,7 +60,7 @@ public class PelitAikavalilla {
 			System.out.printf(format, yksiJoukkue.split("-")[1].trim(),
 					yksiJoukkue.split("-")[0].trim());
 		}
-		
+		System.out.print("\n");
 	}
 
 	//TODO: tiedostosta joukkueet?

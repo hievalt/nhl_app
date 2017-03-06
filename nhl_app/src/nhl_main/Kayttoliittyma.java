@@ -19,17 +19,18 @@ public class Kayttoliittyma {
 	 * @throws ParseException
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
-		System.out.print("Toiminto: ");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String toiminto = br.readLine();
-		
-		// Toimintojen tunnistus ja toteuttaminen
-		switch (toiminto) {
-			case ("aikaväli"):
-				PelitAikavalilla.main(args);
-				break;
-		}
+		while (true) {
+			System.out.print("Toiminto: ");
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			String toiminto = br.readLine();
 
+			// Toimintojen tunnistus ja toteuttaminen
+			switch (toiminto) {
+				case ("aikaväli"):
+					PelitAikavalilla.main(args);
+					break;
+				}
+		}
 	}
 
 }
