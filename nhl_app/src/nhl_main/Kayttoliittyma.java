@@ -3,21 +3,32 @@ package nhl_main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 
 /**
  * "Käyttöliittymä" toimintojen testaamiselle
+ * 
  * @author V, J
  *
  */
 public class Kayttoliittyma {
 
-	/** 
+	/**
 	 * @param args
-	 * @throws IOException 
+	 * @throws IOException
+	 * @throws ParseException
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
+		System.out.print("Toiminto: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String toiminto = br.readLine();
+		
+		// Toimintojen tunnistus ja toteuttaminen
+		switch (toiminto) {
+			case ("aikaväli"):
+				PelitAikavalilla.main(args);
+				break;
+		}
 
 	}
 

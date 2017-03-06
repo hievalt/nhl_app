@@ -37,7 +37,7 @@ public class PelitAikavalilla {
 		String loppupvm = br.readLine();
 		Tulosta(joukkue, alkupvm, loppupvm);
 	}
-
+	
 	private static void Tulosta(String joukkue, String alkupvm, String loppupvm) throws IOException, ParseException {
 		String format = "%-15s%s%n"; // Tyhjän välin pituus joukkueen ja pelimäärän välissä tulosteessa
 		String yksiJoukkue = ""; // Jos haetaan tiettyä joukkuetta
