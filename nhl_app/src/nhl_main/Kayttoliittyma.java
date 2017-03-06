@@ -20,16 +20,10 @@ public class Kayttoliittyma {
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		while (true) {
-			System.out.print("Toiminto: ");
+			System.out.print("Toiminto: (vaihtoehdot: aikavali; pelaajat)");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String toiminto = br.readLine();
 
-		// Toimintojen tunnistus ja toteuttaminen
-		switch (toiminto) {
-			case ("aikavali"):
-				PelitAikavalilla.main(args);
-				break;
-		}
 		// Toimintojen tunnistus ja toteuttaminen
 			switch (toiminto) {
 				case ("aikavali"):
