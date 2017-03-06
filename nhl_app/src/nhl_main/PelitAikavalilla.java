@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Ohjelmalla lasketaan tietyn tai kaikkien joukkueiden pelim‰‰ri‰ tietyll‰ aikav‰lill‰
  * @author Valtteri Hietala
  * @author Juuso Eskelinen
  * version 6.3.2017
