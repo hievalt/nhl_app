@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Ohjelmalla lasketaan tietyn tai kaikkien joukkueiden pelimääriä tietyllä aikavälillä
+ * Ohjelmalla lasketaan tietyn tai kaikkien joukkueiden pelimï¿½ï¿½riï¿½ tietyllï¿½ aikavï¿½lillï¿½
  * @author Valtteri Hietala
  * @author Juuso Eskelinen
  * version 6.3.2017
@@ -20,7 +20,7 @@ import java.util.List;
 public class PelitAikavalilla {
 
 	/**
-	 * Tietojen kysyminen käyttäjältä ja tulosten tulostus
+	 * Tietojen kysyminen kï¿½yttï¿½jï¿½ltï¿½ ja tulosten tulostus
 	 * 
 	 * @param args
 	 * @throws IOException
@@ -29,17 +29,20 @@ public class PelitAikavalilla {
 	public static void main(String[] args) throws IOException, ParseException {
 		// TiedonsyÃ¶ttÃ¶
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("\nsyötä joukkue (tyhjä = haetaan kaikki): ");
+		System.out.print("\nsyï¿½tï¿½ joukkue (tyhjï¿½ = haetaan kaikki): ");
 		String joukkue = br.readLine();
-		System.out.print("Syötä alkupvm: ");
+		System.out.print("Syï¿½tï¿½ alkupvm: ");
 		String alkupvm = br.readLine();
-		System.out.print("Syötä loppupvm: ");
+		System.out.print("Syï¿½tï¿½ loppupvm: ");
 		String loppupvm = br.readLine();
-		String format = "%-15s%s%n";
+		Tulosta(joukkue, alkupvm, loppupvm);
+	}
+
+	private static void Tulosta(String joukkue, String alkupvm, String loppupvm) throws IOException, ParseException {
+		String format = "%-15s%s%n"; // TyhjÃ¤n vÃ¤lin pituus joukkueen ja pelimÃ¤Ã¤rÃ¤n vÃ¤lissÃ¤ tulosteessa
 		String yksiJoukkue = ""; // Jos haetaan tiettyÃ¤ joukkuetta
 		
-		System.out.print("\nPelimÃ¤Ã¤rÃ¤t aikavÃ¤lillÃ¤ " + alkupvm + " - "
-				+ loppupvm + ":\n");
+		System.out.print("\nPelimÃ¤Ã¤rÃ¤t aikavÃ¤lillÃ¤ " + alkupvm + " - " + loppupvm + ":\n");
 		
 		if (joukkue.equals("")) {
 			// Haetaan kaikkien joukkueiden pelimÃ¤Ã¤rÃ¤t
@@ -57,6 +60,7 @@ public class PelitAikavalilla {
 			System.out.printf(format, yksiJoukkue.split("-")[1].trim(),
 					yksiJoukkue.split("-")[0].trim());
 		}
+		
 	}
 
 	//TODO: tiedostosta joukkueet?
@@ -103,7 +107,7 @@ public class PelitAikavalilla {
 	 */
 	private static String LueTiedosto(String joukkue, String alkupvm,
 			String loppupvm) throws IOException, ParseException {
-		// System.out.println("Syötetty joukkue oli: " + joukkue);
+		// System.out.println("Syï¿½tetty joukkue oli: " + joukkue);
 		String rivi = "";
 		boolean vali = false;
 		int lkm = 0;
@@ -143,8 +147,7 @@ public class PelitAikavalilla {
 			e.printStackTrace();
 		}
 
-		return lkm + " peliä - " + joukkue; // + "aikavÃ¤lillÃ¤ " + alkupvm +
-											// " - " + loppupvm ;
+		return lkm + " peliï¿½ - " + joukkue;
 	}
 
 	/**
@@ -159,9 +162,6 @@ public class PelitAikavalilla {
 			throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		if (pvmrivi != "" && pvmSyote != "") {
-			// pvmrivi = pvmrivi.split("/")[2] + "/" + pvmrivi.split("/")[1] +
-			// "/"
-			// + pvmrivi.split("/")[0];
 			Date tiedostosta = sdf.parse(pvmrivi);
 			Date annettu = sdf.parse(pvmSyote);
 			return VertailePvm(tiedostosta, annettu);
