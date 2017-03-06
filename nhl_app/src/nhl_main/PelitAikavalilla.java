@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 
  * @author v
- * 
+ * @author j
+ * version 6.3.2017
  */
 public class PelitAikavalilla {
 
