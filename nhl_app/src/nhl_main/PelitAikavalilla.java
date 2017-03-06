@@ -29,11 +29,11 @@ public class PelitAikavalilla {
 	public static void main(String[] args) throws IOException, ParseException {
 		// Tiedonsyöttö
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("\nsy�t� joukkue (tyhj� = haetaan kaikki): ");
+		System.out.print("\nInsert team (empty = get all): ");
 		String joukkue = br.readLine();
-		System.out.print("Sy�t� alkupvm: ");
+		System.out.print("Give starting date(dd.mm.yyyy): ");
 		String alkupvm = br.readLine();
-		System.out.print("Sy�t� loppupvm: ");
+		System.out.print("Give ending date(dd.mm.yyyy): ");
 		String loppupvm = br.readLine();
 		Tulosta(joukkue, alkupvm, loppupvm);
 	}
@@ -42,7 +42,7 @@ public class PelitAikavalilla {
 		String format = "%-15s%s%n"; // Tyhjän välin pituus joukkueen ja pelimäärän välissä tulosteessa
 		String yksiJoukkue = ""; // Jos haetaan tiettyä joukkuetta
 		
-		System.out.print("\nPelimäärät aikavälillä " + alkupvm + " - " + loppupvm + ":\n");
+		System.out.print("\nGames played during: " + alkupvm + " - " + loppupvm + ":\n");
 		
 		if (joukkue.equals("")) {
 			// Haetaan kaikkien joukkueiden pelimäärät
@@ -63,7 +63,7 @@ public class PelitAikavalilla {
 		
 	}
 
-	//TODO: tiedostosta joukkueet?
+	
 	/**
 	 * Hakee kaikkien joukkueiden pelimäärät
 	 * 
@@ -75,24 +75,42 @@ public class PelitAikavalilla {
 	 * @throws ParseException
 	 */
 	private static List<String> HaeKaikki(List<String> pelimaarat, String alkupvm, String loppupvm) throws IOException, ParseException {
-		String[] joukkueet = { "Anaheim", "Arizona", "Boston", "Buffalo",
-				"Calgary", "Carolina", "Chicago", "Colorado", "Columbus",
-				"Dallas", "Detroit", "Edmonton", "Florida", "LA Kings",
-				"Minnesota", "Montreal", "Nashville", "NJ Devils",
-				"NY Rangers", "NY Islanders", "Philadelphia", "Pittsburgh",
-				"Ottawa", "San Jose", "St Louis", "Tampa Bay", "Toronto",
-				"Vancouver",
-				// "Vegas Golden",
-				"Washington", "Winnipeg" };
-		
+		List<String> joukkueet = luoJoukkueLista("resources/teamlist.txt");
 		// Käy joukkuelistan läpi ja hakee jokaisen joukkueen pelimäärät
-		for (int i = 0; i < joukkueet.length; i++) {
-			pelimaarat.add(LueTiedosto(joukkueet[i], alkupvm, loppupvm));
+		for (int i = 0; i < joukkueet.size(); i++) {
+			pelimaarat.add(LueTiedosto(joukkueet.get(i), alkupvm, loppupvm));
 		}
 		// Järjestetään pelimäärän mukaan
 		Collections.sort(pelimaarat, Collections.reverseOrder());
 		return pelimaarat;
 		
+	}
+	
+	
+	/**
+	 * Haetaan tiedostosta joukkueet listaan
+	 * @param tiedostonnimi tiedosto, josta haetaan
+	 * @return lista joukkueista
+	 * @throws IOException 
+	 */
+	public static List<String> luoJoukkueLista(String tiedostonnimi) throws IOException {
+		List<String> l = new ArrayList<String>();
+		BufferedReader br = new BufferedReader(new FileReader(tiedostonnimi));
+		try {
+		    String line = br.readLine();
+
+		    while (line != null) {
+		        line = br.readLine();
+		        l.add(line);
+		    }		    
+		} finally {
+		    br.close();
+		}
+		//poistetaan listan lopusta ylim. nullit
+		for(int i = 0; i < l.size(); i ++){
+			if(l.get(i) == null) l.remove(i);
+		}
+		return l;
 	}
 
 	/**
@@ -147,7 +165,7 @@ public class PelitAikavalilla {
 			e.printStackTrace();
 		}
 
-		return lkm + " peli� - " + joukkue;
+		return lkm + " Games Played - " + joukkue;
 	}
 
 	/**
