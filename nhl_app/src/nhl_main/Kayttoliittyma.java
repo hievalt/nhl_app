@@ -31,7 +31,7 @@ public class Kayttoliittyma {
 					break;
 				case ("pelaajat"):
 					HaePelaajat.main(args);
-				break;
+					break;
 				}
 		}
 	}
