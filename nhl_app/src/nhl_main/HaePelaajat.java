@@ -12,31 +12,29 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * 
+ * Hakee tietyn joukkueen pelaajat
  * @author v,j
  *
  */
 public class HaePelaajat {
+	
+	// Constructor
+	HaePelaajat(){}
 
-	/**
-	 * Tiedonsyöttö
-	 * @param args
-	 * @throws IOException
-	 */
-	public static void main(String[] args) throws IOException {
-		System.out.print("Joukkue: ");
+	void Syote() throws IOException{
+		System.out.println("Joukkue: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String joukkue = br.readLine();
-		System.out.println("");
-		Tulosta(LuoLista(joukkue));
-
+		Tulosta(joukkue);
 	}
-
 	/**
 	 * Tulostaa listan pelaajista
 	 * @param pelaajalista 		Lista pelaajista
+	 * @throws IOException 
 	 */
-	private static void Tulosta(List<String> pelaajalista) {
+	private static void Tulosta(String joukkue) throws IOException {
+		List<String> pelaajalista = new ArrayList<String>();
+		pelaajalista = LuoLista(joukkue);
 		for (String pelaaja : pelaajalista){
 			System.out.println(pelaaja);
 		}
@@ -51,7 +49,7 @@ public class HaePelaajat {
 	 */
 	private static Elements HaeSivulta(String joukkue) throws IOException {
 		Document sivu = Jsoup.connect("https://www.nhl.com/"+joukkue+"/roster").get();
-		Elements pelaajat = sivu.getElementsByClass("name-col");
+		Elements pelaajat = sivu.select(".name-col");
 		return pelaajat;
 	}
 
