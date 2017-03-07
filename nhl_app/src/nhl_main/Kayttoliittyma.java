@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 
 /**
- * "KÃ¤yttÃ¶liittymÃ¤" toimintojen testaamiselle
- * 
- * @author V, J
- *
+ * Käyttöliittymän simulointia konsolissa toimintojen testaamiselle
+ * @author Valtteri Hietala
+ * @author Juuso Eskelinen
+ * Version 7.3.2017
  */
 public class Kayttoliittyma {
 

@@ -18,7 +18,27 @@ import java.util.List;
  * version 6.3.2017
  */
 public class PelitAikavalilla {
+	
+	private static List<String> pelimaarat = new ArrayList<String>();
+	
+	
+	public PelitAikavalilla() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	/**
+	 * Constructiori luokalle
+	 */
+	public PelitAikavalilla(String pvm, String pvm2){
+		this.HaeKaikki(pvm, pvm2);
+	}
+	
 
+
+	public List<String> getPelimaarat(){
+		return pelimaarat;
+	}
 	/**
 	 * Tietojen kysyminen k�ytt�j�lt� ja tulosten tulostus
 	 * 
@@ -28,6 +48,7 @@ public class PelitAikavalilla {
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		// Tiedonsyöttö
+		PelitAikavalilla  p = new PelitAikavalilla();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("\nInsert team (empty = get all): ");
 		String joukkue = br.readLine();
@@ -35,20 +56,17 @@ public class PelitAikavalilla {
 		String alkupvm = br.readLine();
 		System.out.print("Give ending date(dd.mm.yyyy): ");
 		String loppupvm = br.readLine();
-		Tulosta(joukkue, alkupvm, loppupvm);
+		p.HaeKaikki(alkupvm, loppupvm);
+		p.Tulosta(joukkue, alkupvm, loppupvm);
 	}
 	
-	private static void Tulosta(String joukkue, String alkupvm, String loppupvm) throws IOException, ParseException {
+	private void Tulosta(String joukkue, String alkupvm, String loppupvm){
 		String format = "%-15s%s%n"; // Tyhjän välin pituus joukkueen ja pelimäärän välissä tulosteessa
 		String yksiJoukkue = ""; // Jos haetaan tiettyä joukkuetta
 		
-		System.out.print("\nGames played during: " + alkupvm + " - " + loppupvm + ":\n");
-		
+		System.out.print("\nGames played during: " + alkupvm + " - " + loppupvm + ":\n");	
 		if (joukkue.equals("")) {
-			// Haetaan kaikkien joukkueiden pelimäärät
-			List<String> pelimaarat = new ArrayList<String>();
-			pelimaarat = HaeKaikki(pelimaarat, alkupvm, loppupvm);
-			
+		
 			// Tulostetaan pelimäärät joukkueittain
 			for (String peli : pelimaarat) {
 				System.out.printf(format, peli.split("-")[1].trim(),
@@ -56,7 +74,15 @@ public class PelitAikavalilla {
 			}
 		} else {
 			// Haetaan vain tietyn joukkueen pelimäärä
-			yksiJoukkue = LueTiedosto(joukkue, alkupvm, loppupvm);
+			try {
+				yksiJoukkue = LueTiedosto(joukkue, alkupvm, loppupvm);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.printf(format, yksiJoukkue.split("-")[1].trim(),
 					yksiJoukkue.split("-")[0].trim());
 		}
@@ -69,19 +95,33 @@ public class PelitAikavalilla {
 	 * @param pelimaarat 	Tulostettava lista
 	 * @param alkupvm		Käyttäjän asettama pvm alaraja
 	 * @param loppupvm 		Käyttäjän asettama pvm yläraja
+	 * @return 
 	 * @return List<String> pelimaarat
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	private static List<String> HaeKaikki(List<String> pelimaarat, String alkupvm, String loppupvm) throws IOException, ParseException {
-		List<String> joukkueet = luoJoukkueLista("resources/teamlist.txt");
+	private void HaeKaikki(String alkupvm, String loppupvm) {
+		List<String> joukkueet = null;
+		try {
+			joukkueet = luoJoukkueLista("resources/teamlist.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Käy joukkuelistan läpi ja hakee jokaisen joukkueen pelimäärät
 		for (int i = 0; i < joukkueet.size(); i++) {
-			pelimaarat.add(LueTiedosto(joukkueet.get(i), alkupvm, loppupvm));
+			try {
+				pelimaarat.add(LueTiedosto(joukkueet.get(i), alkupvm, loppupvm));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		// Järjestetään pelimäärän mukaan
 		Collections.sort(pelimaarat, Collections.reverseOrder());
-		return pelimaarat;
 		
 	}
 	
@@ -92,7 +132,7 @@ public class PelitAikavalilla {
 	 * @return lista joukkueista
 	 * @throws IOException 
 	 */
-	public static List<String> luoJoukkueLista(String tiedostonnimi) throws IOException {
+	public List<String> luoJoukkueLista(String tiedostonnimi) throws IOException {
 		List<String> l = new ArrayList<String>();
 		BufferedReader br = new BufferedReader(new FileReader(tiedostonnimi));
 		try {
@@ -122,7 +162,7 @@ public class PelitAikavalilla {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	private static String LueTiedosto(String joukkue, String alkupvm, String loppupvm) throws IOException, ParseException {
+	private String LueTiedosto(String joukkue, String alkupvm, String loppupvm) throws IOException, ParseException {
 		String rivi = "";
 		boolean vali = false;
 		int lkm = 0;
@@ -173,7 +213,7 @@ public class PelitAikavalilla {
 	 * @return int 			-1 jos käyttäjän syöte tiedostosta luetun päivämäärän ennen, 0 jos sama, 1 jos jälkeen
 	 * @throws ParseException
 	 */
-	private static int TarkistaPvm(String pvmrivi, String pvmSyote)
+	private int TarkistaPvm(String pvmrivi, String pvmSyote)
 			throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		if (pvmrivi != "" && pvmSyote != "") {
