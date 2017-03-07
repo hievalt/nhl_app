@@ -9,24 +9,40 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 /**
- * Hakee joukkueiden nimet, kaupungit
- * @author v,j
- *
- */
+* Hakee joukkueet
+* @author Valtteri Hietala
+* @author Juuso Eskelinen
+* Version 7.3.2017 // Version changes: method and function naming corrected(starting with lower case), Made class more object oriented:
+* constructors ja get-method
+*/
 public class HaeJoukkueet{
 	
+	private List<String> joukkuelista = new ArrayList<String>();
+	
 	// Constructor
-	HaeJoukkueet(){}
+	HaeJoukkueet(){
+		luoLista();
+	}
+	
+	public List<String> getLista(){
+		return joukkuelista;
+	}
+	
 	
 	/**
 	 * Luo listan joukkueiden nimistä
 	 * @return joukkuelista		String lista joukkueista
 	 * @throws IOException
 	 */
-	private List<String> LuoLista() throws IOException{
-		Document sivu = Jsoup.connect("https://www.nhl.com/info/teams").get();
-		Elements joukkueCity = HaeSivulta(sivu, "team-city");
-		List<String> joukkuelista = new ArrayList<String>();
+	private List<String> luoLista() {
+		Document sivu = null;
+		try {
+			sivu = Jsoup.connect("https://www.nhl.com/info/teams").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Elements joukkueCity = haeSivulta(sivu, "team-city");
 		for (int i = 0; i < joukkueCity.size(); i++) joukkuelista.add(joukkueCity.eq(i).text()); 
 		return joukkuelista;
 	}
@@ -38,7 +54,7 @@ public class HaeJoukkueet{
 	 * @return joukkueInfo		Elementtilista, joukkueiden nimet ja kaupungit
 	 * @throws IOException
 	 */
-	private Elements HaeSivulta(Document sivu, String selector) throws IOException {
+	private Elements haeSivulta(Document sivu, String selector) {
 		Elements joukkueInfo = sivu.select("a."+selector);
 		return joukkueInfo;
 	}
@@ -47,13 +63,10 @@ public class HaeJoukkueet{
 	 * Tulostaa listan joukkueista
 	 * @throws IOException
 	 */
-	void Tulosta() throws IOException{
+	void tulosta() throws IOException{
 		List<String> joukkueet = new ArrayList<String>();
-		joukkueet = LuoLista();
+		joukkueet = getLista();
 		for (String joukkue : joukkueet) System.out.println(joukkue); 
 	}
 	
-	public List<String> LataaLista() throws IOException{
-		return LuoLista();	
-	}
 }

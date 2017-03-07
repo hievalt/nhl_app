@@ -36,7 +36,7 @@ public class Kayttoliittyma {
 					break;
 				case ("joukkueet"):
 					HaeJoukkueet joukkueet = new HaeJoukkueet();
-					joukkueet.Tulosta();
+					joukkueet.tulosta();
 					break;
 			}
 		}

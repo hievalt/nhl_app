@@ -59,7 +59,7 @@ public class GUI extends JFrame {
 		// Joukkueiden haku
 		HaeJoukkueet joukkueLista = new HaeJoukkueet();
 		List<String> joukkueet = new ArrayList<String>();
-		joukkueet = joukkueLista.LataaLista();
+		joukkueet = joukkueLista.getLista();
 		for (String joukkue : joukkueet){
 			joukkueetModel.addElement(joukkue);
 		}

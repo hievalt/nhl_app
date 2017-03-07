@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 /**
  * Hakee tietyn joukkueen pelaajat
  * @author Valtteri Hietala
- * @authot Juuso Eskelinen
+ * @author Juuso Eskelinen
  * Version 7.3.2017 // Version changes: method and function naming corrected(starting with lower case), Made class more object oriented:
  * constructors ja get-method
  */
