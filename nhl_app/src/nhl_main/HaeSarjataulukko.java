@@ -25,14 +25,6 @@ public class HaeSarjataulukko {
 	}
 	
 	
-	/**
-	 * vaihtoehtoinen constructori.
-	 * @param sivu sivusto josta haetaan
-	 */
-	HaeSarjataulukko(String sivu){
-		this.luoLista(sivu);
-	}
-	
 	public String[][] getLista(){
 		return sarjataulukko;
 	}

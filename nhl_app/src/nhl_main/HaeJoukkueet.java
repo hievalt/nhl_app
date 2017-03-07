@@ -24,15 +24,15 @@ public class HaeJoukkueet{
 	 * oletus constructori, haetaan nhl sivuilta.
 	 */
 	HaeJoukkueet(){
-		this.luoLista("https://www.nhl.com/info/teams");
+		this.luoLista("https://www.nhl.com/info/teams", "team-city");
 	}
 	
 	/**
 	 * vaihtoehtoinen constructori.
 	 * @param sivu sivusto josta haetaan
 	 */
-	HaeJoukkueet(String sivu){
-		this.luoLista(sivu);
+	HaeJoukkueet(String sivu, String selector){
+		this.luoLista(sivu, selector);
 	}
 	
 	public List<String> getLista(){
@@ -45,7 +45,7 @@ public class HaeJoukkueet{
 	 * @return joukkuelista		String lista joukkueista
 	 * @throws IOException
 	 */
-	private void luoLista(String sivusto) {
+	private void luoLista(String sivusto, String selector) {
 		Document sivu = null;
 		try {
 			sivu = Jsoup.connect(sivusto).get();
@@ -53,7 +53,7 @@ public class HaeJoukkueet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Elements joukkueCity = haeSivulta(sivu, "team-city");
+		Elements joukkueCity = haeSivulta(sivu, selector);
 		for (int i = 0; i < joukkueCity.size(); i++) {
 			joukkuelista.add(joukkueCity.eq(i).text()); 
 		}
