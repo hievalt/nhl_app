@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
  * @author v,j
  *
  */
-public class HaeJoukkueet {
+public class HaeJoukkueet{
 	
 	// Constructor
 	HaeJoukkueet(){}
@@ -55,5 +55,9 @@ public class HaeJoukkueet {
 		for (String joukkue : joukkueet){
 			System.out.println(joukkue);
 		}
+	}
+	
+	public List<String> LataaLista() throws IOException{
+		return LuoLista();	
 	}
 }
