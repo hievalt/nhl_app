@@ -45,7 +45,7 @@ public class HaeJoukkueet{
 	 * @return joukkuelista		String lista joukkueista
 	 * @throws IOException
 	 */
-	private List<String> luoLista(String sivusto) {
+	private void luoLista(String sivusto) {
 		Document sivu = null;
 		try {
 			sivu = Jsoup.connect(sivusto).get();
@@ -54,8 +54,9 @@ public class HaeJoukkueet{
 			e.printStackTrace();
 		}
 		Elements joukkueCity = haeSivulta(sivu, "team-city");
-		for (int i = 0; i < joukkueCity.size(); i++) joukkuelista.add(joukkueCity.eq(i).text()); 
-		return joukkuelista;
+		for (int i = 0; i < joukkueCity.size(); i++) {
+			joukkuelista.add(joukkueCity.eq(i).text()); 
+		}
 	}
 	
 	/**

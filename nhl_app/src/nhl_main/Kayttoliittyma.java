@@ -20,7 +20,7 @@ public class Kayttoliittyma {
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		while (true) {
-			System.out.print("\nToiminnot: aikavali, pelaajat, joukkueet");
+			System.out.print("\nToiminnot: aikavali, pelaajat, joukkueet, sarjataulukko");
 			System.out.print("\n:");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String toiminto = br.readLine();
@@ -37,6 +37,10 @@ public class Kayttoliittyma {
 				case ("joukkueet"):
 					HaeJoukkueet joukkueet = new HaeJoukkueet();
 					joukkueet.tulosta();
+					break;
+				case ("sarjataulukko"):
+					HaeSarjataulukko s = new HaeSarjataulukko();
+					s.tulosta();
 					break;
 			}
 		}
