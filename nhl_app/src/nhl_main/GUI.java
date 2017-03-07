@@ -60,7 +60,9 @@ public class GUI extends JFrame {
 		HaeJoukkueet joukkueLista = new HaeJoukkueet();
 		List<String> joukkueet = new ArrayList<String>();
 		joukkueet = joukkueLista.LataaLista();
-		for (String joukkue : joukkueet) joukkueetModel.addElement(joukkue);
+		for (String joukkue : joukkueet){
+			joukkueetModel.addElement(joukkue);
+		}
 	    
 	    // Joukkuelista
 	    final JList<String> joukkueBox = new JList<String>(joukkueetModel);
@@ -100,10 +102,10 @@ public class GUI extends JFrame {
 	    		}
 	    		
 	    		// Haetaan lista joukkueen pelaajista
-	    		HaePelaajat pelaajaLista = new HaePelaajat(valittuJoukkue);
-	    		List<String> pelaajat = new ArrayList<String>();
+	    		HaePelaajat pelaajaLista = new HaePelaajat(valittuJoukkue); // luodaan HaePelaajat-olio
+	    		List<String> pelaajat = new ArrayList<String>(); //alustetaan pelaajalista
 	    		try {
-					pelaajat = pelaajaLista.getLista();
+					pelaajat = pelaajaLista.getLista(); //pyydet‰‰n oliolta pelaajalistaa
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
