@@ -19,9 +19,20 @@ public class HaeJoukkueet{
 	
 	private List<String> joukkuelista = new ArrayList<String>();
 	
-	// Constructor
+	
+	/**
+	 * oletus constructori, haetaan nhl sivuilta.
+	 */
 	HaeJoukkueet(){
-		luoLista();
+		this.luoLista("https://www.nhl.com/info/teams");
+	}
+	
+	/**
+	 * vaihtoehtoinen constructori.
+	 * @param sivu sivusto josta haetaan
+	 */
+	HaeJoukkueet(String sivu){
+		this.luoLista(sivu);
 	}
 	
 	public List<String> getLista(){
@@ -34,10 +45,10 @@ public class HaeJoukkueet{
 	 * @return joukkuelista		String lista joukkueista
 	 * @throws IOException
 	 */
-	private List<String> luoLista() {
+	private List<String> luoLista(String sivusto) {
 		Document sivu = null;
 		try {
-			sivu = Jsoup.connect("https://www.nhl.com/info/teams").get();
+			sivu = Jsoup.connect(sivusto).get();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
