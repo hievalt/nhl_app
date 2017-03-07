@@ -15,7 +15,7 @@ import java.util.List;
  * Ohjelmalla lasketaan tietyn tai kaikkien joukkueiden pelimï¿½ï¿½riï¿½ tietyllï¿½ aikavï¿½lillï¿½
  * @author Valtteri Hietala
  * @author Juuso Eskelinen
- * version 6.3.2017
+ * version 6´7.3.2017  //TODO: kolmas konstruktori tietyn joukkuuen pelimäärien luomiselle ja metodi "haeTietty"
  */
 public class PelitAikavalilla {
 	
@@ -88,7 +88,7 @@ public class PelitAikavalilla {
 		}
 	}
 
-	
+
 	/**
 	 * Hakee kaikkien joukkueiden pelimÃ¤Ã¤rÃ¤t
 	 * 
