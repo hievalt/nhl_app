@@ -27,9 +27,7 @@ public class HaeJoukkueet{
 		Document sivu = Jsoup.connect("https://www.nhl.com/info/teams").get();
 		Elements joukkueCity = HaeSivulta(sivu, "team-city");
 		List<String> joukkuelista = new ArrayList<String>();
-		for (int i = 0; i < joukkueCity.size(); i++){
-			joukkuelista.add(joukkueCity.eq(i).text());
-		}
+		for (int i = 0; i < joukkueCity.size(); i++) joukkuelista.add(joukkueCity.eq(i).text()); 
 		return joukkuelista;
 	}
 	
@@ -52,9 +50,7 @@ public class HaeJoukkueet{
 	void Tulosta() throws IOException{
 		List<String> joukkueet = new ArrayList<String>();
 		joukkueet = LuoLista();
-		for (String joukkue : joukkueet){
-			System.out.println(joukkue);
-		}
+		for (String joukkue : joukkueet) System.out.println(joukkue); 
 	}
 	
 	public List<String> LataaLista() throws IOException{

@@ -28,7 +28,7 @@ public class Kayttoliittyma {
 		// Toimintojen tunnistus ja toteuttaminen
 			switch (toiminto) {
 				case ("aikavali"):
-					PelitAikavalilla.main(args);
+					//PelitAikavalilla.main(args);
 					break;
 				case ("pelaajat"):
 					HaePelaajat pelaajat = new HaePelaajat();

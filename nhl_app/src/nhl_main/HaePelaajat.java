@@ -21,7 +21,7 @@ public class HaePelaajat{
 	// Constructor
 	HaePelaajat(){}
 
-	void Syote() throws IOException{
+	public void Syote() throws IOException{
 		System.out.println("Joukkue: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String joukkue = br.readLine();
@@ -32,12 +32,10 @@ public class HaePelaajat{
 	 * @param pelaajalista 		Lista pelaajista
 	 * @throws IOException 
 	 */
-	private static void Tulosta(String joukkue) throws IOException {
+	private void Tulosta(String joukkue) throws IOException {
 		List<String> pelaajalista = new ArrayList<String>();
 		pelaajalista = LuoLista(joukkue);
-		for (String pelaaja : pelaajalista){
-			System.out.println(pelaaja);
-		}
+		for (String pelaaja : pelaajalista) System.out.println(pelaaja);
 		
 	}
 
@@ -47,29 +45,34 @@ public class HaePelaajat{
 	 * @return pelaajat		Elementtilista pelaajista
 	 * @throws IOException
 	 */
-	private static Elements HaeSivulta(String joukkue) throws IOException {
+	private Elements HaeSivulta(String joukkue) throws IOException {
 		Document sivu = Jsoup.connect("https://www.nhl.com/"+joukkue+"/roster").get();
 		Elements pelaajat = sivu.select(".name-col");
 		return pelaajat;
 	}
 
 	/**
-	 * 
+	 * Luo listan pelaajista
 	 * @param joukkue 			Joukkueen nimi
 	 * @return pelaajalista 	String-lista pelaajista
 	 * @throws IOException
 	 */
-	private static List<String> LuoLista(String joukkue) throws IOException {
-		Elements pelaajat = HaeSivulta(joukkue);
+	private List<String> LuoLista(String joukkue) throws IOException {
+		
+		HaePelaajat olio = new HaePelaajat();
+		Elements pelaajat = olio.HaeSivulta(joukkue);
+		
 		List<String> pelaajalista = new ArrayList<String>();
 		int rooliIndex = 0;
-		String[] roolit = {"Forwards", "Defense", "Goalies"};
+		String[] roolit = {"FORWARDS", "DEFENSE", "GOALIES"};
+		
 		for (Element pelaaja : pelaajat){
 			if (pelaaja.text().equals("Player") && rooliIndex < 3){
 				pelaajalista.add(roolit[rooliIndex]);
 				rooliIndex++;
 			} else pelaajalista.add(pelaaja.text());
 		}
+		
 		return pelaajalista;
 		
 	}
