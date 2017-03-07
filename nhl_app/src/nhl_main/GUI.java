@@ -100,16 +100,18 @@ public class GUI extends JFrame {
 	    		}
 	    		
 	    		// Haetaan lista joukkueen pelaajista
-	    		HaePelaajat pelaajaLista = new HaePelaajat();
+	    		HaePelaajat pelaajaLista = new HaePelaajat(valittuJoukkue);
 	    		List<String> pelaajat = new ArrayList<String>();
 	    		try {
-					pelaajat = pelaajaLista.LataaLista(valittuJoukkue);
+					pelaajat = pelaajaLista.getLista();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 	    		
 	    		// Lisätään pelaajat GUIn listaan
-	    		for (String pelaaja : pelaajat) pelaajatModel.addElement(pelaaja);
+	    		for (String pelaaja : pelaajat) {
+	    			pelaajatModel.addElement(pelaaja);
+	    		}
 	    	}
 	    });
 		

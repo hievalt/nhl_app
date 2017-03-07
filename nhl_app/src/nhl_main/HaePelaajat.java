@@ -13,28 +13,52 @@ import org.jsoup.select.Elements;
 
 /**
  * Hakee tietyn joukkueen pelaajat
- * @author v,j
- *
+ * @author Valtteri Hietala
+ * @authot Juuso Eskelinen
+ * Version 7.3.2017 // Version changes: method and function naming corrected(starting with lower case), Made class more object oriented:
+ * constructors ja get-method
  */
 public class HaePelaajat{
+	private List<String> pelaajalista = new ArrayList<String>();
 	
-	// Constructor
-	HaePelaajat(){}
+	/**
+	 * Empty constructor
+	 */
+	HaePelaajat(){
+		
+	}
+	
+	
+	/**
+	 * Constructor with team attribute
+	 * @param joukkue team which the list of players will be created
+	 * @throws IOException
+	 */
+	HaePelaajat(String joukkue){
+		this.luoLista(joukkue);
+	}
+	
+	
+	
+	public List<String> getLista() throws IOException {
+		return pelaajalista;
+	}
 
-	public void Syote() throws IOException{
+
+	public void syote() throws IOException{
 		System.out.println("Joukkue: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String joukkue = br.readLine();
-		Tulosta(joukkue);
+		tulosta(joukkue);
 	}
 	/**
 	 * Tulostaa listan pelaajista
 	 * @param pelaajalista 		Lista pelaajista
 	 * @throws IOException 
 	 */
-	private void Tulosta(String joukkue) throws IOException {
+	private void tulosta(String joukkue) throws IOException {
 		List<String> pelaajalista = new ArrayList<String>();
-		pelaajalista = LuoLista(joukkue);
+		pelaajalista = getLista();
 		for (String pelaaja : pelaajalista) System.out.println(pelaaja);
 		
 	}
@@ -45,7 +69,7 @@ public class HaePelaajat{
 	 * @return pelaajat		Elementtilista pelaajista
 	 * @throws IOException
 	 */
-	private Elements HaeSivulta(String joukkue) throws IOException {
+	private Elements haeSivulta(String joukkue) throws IOException {
 		Document sivu = Jsoup.connect("https://www.nhl.com/"+joukkue+"/roster").get();
 		Elements pelaajat = sivu.select(".name-col");
 		return pelaajat;
@@ -57,12 +81,17 @@ public class HaePelaajat{
 	 * @return pelaajalista 	String-lista pelaajista
 	 * @throws IOException
 	 */
-	private List<String> LuoLista(String joukkue) throws IOException {
+	private void luoLista(String joukkue) {
 		
 		HaePelaajat olio = new HaePelaajat();
-		Elements pelaajat = olio.HaeSivulta(joukkue);
+		Elements pelaajat = null;
+		try {
+			pelaajat = olio.haeSivulta(joukkue);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		List<String> pelaajalista = new ArrayList<String>();
 		int rooliIndex = 0;
 		String[] roolit = {"FORWARDS", "DEFENSE", "GOALIES"};
 		
@@ -73,12 +102,6 @@ public class HaePelaajat{
 			} else pelaajalista.add(pelaaja.text());
 		}
 		
-		return pelaajalista;
 		
 	}
-
-	public List<String> LataaLista(String joukkue) throws IOException {
-		return LuoLista(joukkue);
-	}
-
 }

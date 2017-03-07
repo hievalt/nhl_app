@@ -32,7 +32,7 @@ public class Kayttoliittyma {
 					break;
 				case ("pelaajat"):
 					HaePelaajat pelaajat = new HaePelaajat();
-					pelaajat.Syote();
+					pelaajat.syote();
 					break;
 				case ("joukkueet"):
 					HaeJoukkueet joukkueet = new HaeJoukkueet();
