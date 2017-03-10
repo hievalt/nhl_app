@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
  * 
  * @author v
  * 
- * Pelaajia ei voi hakee suoraan vaan täytyy tietää pelaajan joukkue
+ * TODO: Pelaajia ei voi hakee suoraan vaan täytyy tietää pelaajan joukkue, joku ratkasu tähän?
  */
 public class FetchData {
 	
