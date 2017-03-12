@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Player {
 	
 	private String player_name, player_url;
-	private static int next_id = 0;
+	private static int next_id = 1;
 	private int player_id, team_id;
 	private StatTable player_stats = new StatTable();
 	
@@ -63,6 +63,10 @@ public class Player {
 	public StatTable getStats() throws IOException{
 		if (this.player_stats.getSize() < 1) this.player_stats = new StatTable(this);
 		return this.player_stats;
+	}
+
+	public String print() {
+		return this.getName() + " (id: " + this.getTeamId() + ")";
 	}
 		
 }

@@ -44,15 +44,17 @@ public class StatTable {
 	 * @throws IOException
 	 */
 	private List<List<String>> createSeasons(Player player) throws IOException {
-		Document player_page = Jsoup.connect("https://www.nhl.com" + player.getUrl()).get();
-		Element seasonStats = player_page.select(".player-overview__stats").first(); // Pitäis saada #careerTable, mutta ei toiminu millää
 		List<List<String>> seasons_data = new ArrayList<List<String>>();
-		List<String> new_season = new ArrayList<String>();
-		new_season.add(seasonStats.select("td[data-col='0']").first().text()); // Season
-		new_season.add(seasonStats.select("td[data-col='2']").first().text()); // Goals
-		new_season.add(seasonStats.select("td[data-col='3']").first().text()); // Assists	
-		new_season.add(seasonStats.select("td[data-col='4']").first().text()); // Points
-		seasons_data.add(new_season);
+		if (player.getUrl() != null){
+			Document player_page = Jsoup.connect("https://www.nhl.com" + player.getUrl()).get();
+			Element seasonStats = player_page.select(".player-overview__stats").first(); // Pitäis saada #careerTable, mutta ei toiminu millää
+			List<String> new_season = new ArrayList<String>();
+			new_season.add(seasonStats.select("td[data-col='0']").first().text()); // Season
+			new_season.add(seasonStats.select("td[data-col='2']").first().text()); // Goals
+			new_season.add(seasonStats.select("td[data-col='3']").first().text()); // Assists	
+			new_season.add(seasonStats.select("td[data-col='4']").first().text()); // Points
+			seasons_data.add(new_season);
+		}
 		return seasons_data;
 	}
 	

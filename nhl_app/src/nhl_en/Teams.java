@@ -74,5 +74,14 @@ public class Teams{
 		for (Team team : this.team_list) if(team.getTeamId() == team_id) return team;
 		return new Team();
 	}
+
+	public Player findPlayer(String player) throws IOException {
+		for (Team team : this.team_list){
+			if (team.getPlayer(player).getName() != null){
+				return team.getPlayer(player);
+			}
+		}
+		return new Player();
+	}
 	
 }

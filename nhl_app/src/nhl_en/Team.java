@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
 public class Team {
 	
 	private String team_name;
-	private static int next_id = 0;
+	private static int next_id = 1;
 	private int team_id;
 	private List<Player> roster = new ArrayList<Player>();
 	
@@ -109,8 +109,14 @@ public class Team {
 		checkRoster();
 		
 		for (Player player : this.roster){
-			if (player.getName().toLowerCase().contains(name.toLowerCase())) return player;
+			if (player.getName().toLowerCase().contains(name.toLowerCase())){
+				return player;
+			}
 		}
 		return new Player();
+	}
+
+	public String print() {
+		return this.getName() + " (id: " + this.getTeamId() + ")";
 	}
 }
